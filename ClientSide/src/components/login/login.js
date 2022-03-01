@@ -1,7 +1,7 @@
 import Navbar from "./loginNavbar";
 import SignIn from "./signIn";
 import "./login.css";
-import pic from "../../images/pic1 PNG.png";
+import pic from "./pic1 PNG.png";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
 export default function Login() {

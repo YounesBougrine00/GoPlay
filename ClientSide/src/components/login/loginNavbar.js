@@ -5,7 +5,7 @@ export default function Navbar() {
     <>
       <div className="navbar-brand">
         <h2>
-          GoPlay<span>.</span>
+          GoPlay<span id="point">.</span>
         </h2>
       </div>
       <div className="navbar">
