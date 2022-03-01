@@ -8,8 +8,8 @@ export default function SignIn() {
             <>
                  <div className="">
                     <form action="">
-                        <div><input type="text" /><span></span></div>
-                        <div><input type="text" /><span></span></div>
+                        <div><input type="text" placeholder="Email or username" /><span></span></div>
+                        <div><input type="text" placeholder="Password" /><span></span></div>
                         <button >Log in</button>
                     </form>
                 </div>

@@ -8,18 +8,26 @@ export default function Navbar() {
           GoPlay<span>.</span>
         </h2>
       </div>
-      <div>
-        <ul id="nav-list" className="nav navbar-nav">
-          <li>
-            <Link to="/about">About us</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact us</Link>
-          </li>
-          <li>
-            <Link to="/faq">FAQ</Link>
-          </li>
-        </ul>
+      <div className="navbar">
+        <nav>
+          <ul id="nav-list" className="nav navbar-nav">
+            <div>
+              <li>
+                <Link to="/about">About us</Link>
+              </li>
+            </div>
+            <div>
+              <li>
+                <Link to="/contact">Contact us</Link>
+              </li>
+            </div>
+            <div>
+              <li>
+                <Link to="/faq">FAQ</Link>
+              </li>
+            </div>
+          </ul>
+        </nav>
       </div>
     </>
   );
