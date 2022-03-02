@@ -31,8 +31,14 @@ header {
     margin-bottom: 2px;
 }
 
+.navbar-brand a {
+    text-decoration: none;
+    color: #000000;
+}
+
 .navbar-brand h2 {
     font-size: 40px;
+    text-decoration: none;
 }
 
 .navbar-brand h2 span#point {
@@ -54,7 +60,7 @@ header {
     border: none;
 }
 
-.nav div li :link {
+.nav div li a {
     color: #000000;
     text-decoration: none;
     font-family: Roboto;

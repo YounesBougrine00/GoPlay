@@ -4,9 +4,11 @@ export default function Navbar() {
   return (
     <>
       <div className="navbar-brand">
-        <h2>
-          GoPlay<span id="point">.</span>
-        </h2>
+        <Link to="/">
+          <h2>
+            GoPlay<span id="point">.</span>
+          </h2>
+        </Link>
       </div>
       <div className="navbar">
         <nav>
