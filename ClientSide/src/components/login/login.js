@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 export default function Login() {
   return (
     <div>
-      <Router>
         <header>
           <Navbar />
           <div>
@@ -35,7 +34,6 @@ export default function Login() {
             </p>
           </div>
         </div>
-      </Router>
     </div>
   );
 }
