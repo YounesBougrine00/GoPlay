@@ -114,15 +114,14 @@ header {
 
 .box1 input,
 .box1 input:focus {
-    /* position: relative; */
     outline: none;
     background: #FFFFFF;
     border: 2px solid #000000;
     border-radius: 40px;
-    border-top-right-radius: 0%;
-    border-bottom-right-radius: 0%;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
     border-right: 0;
-    width: 330px;
+    width: 370px;
     height: 50px;
     margin-bottom: 10px;
     font-family: Roboto;
