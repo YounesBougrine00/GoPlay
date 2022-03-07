@@ -59,6 +59,8 @@ function Selector(props) {
       className="react-select-container"
       classNamePrefix="react-select"
       placeholder={props.placeholder}
+      onMenuClose={props.onMenuClose}
+      onMenuOpen={props.onMenuOpen}
       styles={style}
       id={props.id}
       theme={(theme) => ({
@@ -70,13 +72,18 @@ function Selector(props) {
   );
 }
 
+const setIconDirection = (value) => {
+    document.documentElement.style.setProperty('--icon-direction', `${value}deg`);
+    console.log("This Was Computed");
+  }
+
 function CountrySelector() {
   const [country, setValue] = useState("");
   const [city, setCity] = useState("");
   const [cities, setCities] = useState([])
   const [data, setData] = useState([]);
+  const [iconDirection,setDirection] =useState(0);
   const countries = useMemo(() => countryList().getData(), []);
-  console.log(countries);
     
   useLayoutEffect(() => {
     fetch(
@@ -98,7 +105,8 @@ function CountrySelector() {
     setCities(villes);
     console.log(cities);
    
-  }, [country])
+  }, [country]);
+  
   
   const changeCountry = (value) => {
     setValue(value);
@@ -106,6 +114,8 @@ function CountrySelector() {
   const changeCity = (city) => {
     setCity(city);
   };
+  const onMenuOpen = () => {setDirection(180); console.log("This was computed")};
+  const onMenuClose = () => {setDirection(0); console.log("This was computed")};
 
   return (
       
@@ -117,8 +127,10 @@ function CountrySelector() {
           onChange={changeCountry}
           id="country"
           placeholder="Select your country"
+          onMenuOpen={onMenuOpen}
+          onMenuClose={onMenuClose}
         />
-        <span className="icon-signup">
+        <span className="icon-signup" style={{'transform':`rotate(${iconDirection}deg)`,"transformOrigin":"center"}}>
           <IoIosArrowDown size={20} id="icon" />
         </span>
       </div>
@@ -129,9 +141,11 @@ function CountrySelector() {
           onChange={changeCity}
           id="city"
           placeholder="Select your city"
+          onMenuOpen={onMenuOpen}
+          onMenuClose={onMenuClose}
         />
         <span className="icon-signup">
-          <IoIosArrowDown size={20} id="icon" />
+          <IoIosArrowDown size={20} id="icon" style={{'transform':`rotate(${iconDirection}deg)`,"transformOrigin":"center"}} />
         </span>
       </div>
     </>
