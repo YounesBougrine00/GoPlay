@@ -17,7 +17,7 @@ function Stade(props) {
             <h3>{name}</h3>
           </div>
           <div>
-            {sports.map(sport => <p>{sport} . </p>)}
+            {sports.map(sport => <p key={sport}>{sport} . </p>)}
           </div>
           <div>
             <span style={{ marginRight: "5px" }}>

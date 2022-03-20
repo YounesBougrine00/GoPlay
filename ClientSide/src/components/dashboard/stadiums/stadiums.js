@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect, useEffect } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import "./stadiums.css";
 import { dispatchGetStadiumBySelect, dispatchGetStadiumBySearch,dispatchGetStadium } from "../../../redux/actions/stadiumAction";
@@ -113,6 +113,10 @@ function Stadiums() {
       });
   }, []);
 
+  useEffect(()=> {
+      dispatch(dispatchGetStadiumBySelect({"label": user.city},{"label" : "Football"}));
+  }, [])
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setSearchData({ ...searchData, [name]: value, err: "", success: "" });
@@ -130,7 +134,6 @@ function Stadiums() {
     try {
        dispatch(dispatchGetStadiumBySelect(city,sportType));
     } catch (err) {
-      console.log(err)
       err.response.data.message && setSelectData({ ...selectData, errSelect: err.response.data.message, successSelect: "" });
     }
   }
