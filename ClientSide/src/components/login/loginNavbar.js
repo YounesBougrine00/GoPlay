@@ -11,6 +11,8 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="navbar">
+        {/* <input type="checkbox" id="menu" />
+        <label for="menu">Menu</label> */}
         <nav>
           <ul id="nav-list" className="nav navbar-nav">
             <div>

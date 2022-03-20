@@ -4,7 +4,7 @@ import countryList from "react-select-country-list";
 import { IoIosArrowDown } from "react-icons/io";
 
 
-const style = {
+export const styles = {
   control: (base) => ({
     ...base,
     boxShadow: "none",
@@ -50,7 +50,7 @@ const style = {
     padding: 0,
   }),
 };
-function Selector(props) {
+export function Selector(props) {
   return (
     <Select
       options={props.options}
@@ -61,8 +61,9 @@ function Selector(props) {
       placeholder={props.placeholder}
       onMenuClose={props.onMenuClose}
       onMenuOpen={props.onMenuOpen}
-      styles={style}
-      id={props.id}
+      styles={props.styles}
+      inputId={props.inputId}
+      name={props.name}
       theme={(theme) => ({
         ...theme,
         borderRadius: 15,
@@ -72,14 +73,14 @@ function Selector(props) {
   );
 }
 
-const setIconDirection = (value) => {
-    document.documentElement.style.setProperty('--icon-direction', `${value}deg`);
-    console.log("This Was Computed");
-  }
+// const setIconDirection = (value) => {
+//     document.documentElement.style.setProperty('--icon-direction', `${value}deg`);
+//     console.log("This Was Computed");
+//   }
 
-function CountrySelector() {
-  const [country, setValue] = useState("");
-  const [city, setCity] = useState("");
+function CountrySelector(props) {
+  // const [country, setValue] = useState("");
+  // const [city, setCity] = useState("");
   const [cities, setCities] = useState([])
   const [data, setData] = useState([]);
   const [iconDirection,setDirection] =useState(0);
@@ -99,21 +100,21 @@ function CountrySelector() {
       });
   }, []);
   useEffect(() => {
-    let villes = data[country.label];
+    let villes = data[props.country.label];
     villes = villes?.map((str, index) => ({ label: str, value: index + 1 }));
     console.log(villes);
     setCities(villes);
     console.log(cities);
    
-  }, [country]);
+  }, [props.country]);
   
   
-  const changeCountry = (value) => {
-    setValue(value);
-  };
-  const changeCity = (city) => {
-    setCity(city);
-  };
+  // const changeCountry = (value) => {
+  //   setValue(value);
+  // };
+  // const changeCity = (city) => {
+  //   setCity(city);
+  // };
   const onMenuOpen = () => {setDirection(180); console.log("This was computed")};
   const onMenuClose = () => {setDirection(0); console.log("This was computed")};
 
@@ -123,12 +124,14 @@ function CountrySelector() {
       <div className="input-icons select">
         <Selector
           options={countries}
-          value={country}
-          onChange={changeCountry}
-          id="country"
+          value={props.country}
+          onChange={props.changeCountry}
+          inputId="country"
+          name="country"
           placeholder="Select your country"
           onMenuOpen={onMenuOpen}
           onMenuClose={onMenuClose}
+          styles={styles}
         />
         <span className="icon-signup" style={{'transform':`rotate(${iconDirection}deg)`,"transformOrigin":"center"}}>
           <IoIosArrowDown size={20} id="icon" />
@@ -137,12 +140,14 @@ function CountrySelector() {
       <div className="input-icons select">
        <Selector
           options={cities}
-          value={city}
-          onChange={changeCity}
-          id="city"
+          value={props.city}
+          onChange={props.changeCity}
+          inputId="city"
+          name="city"
           placeholder="Select your city"
           onMenuOpen={onMenuOpen}
           onMenuClose={onMenuClose}
+          styles={styles}
         />
         <span className="icon-signup">
           <IoIosArrowDown size={20} id="icon" style={{'transform':`rotate(${iconDirection}deg)`,"transformOrigin":"center"}} />

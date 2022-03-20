@@ -2,9 +2,17 @@ import Navbar from "./loginNavbar";
 import SignIn from "./signIn";
 import "./login.css";
 import pic from "./pic1 PNG.png";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { BrowserRouter as Router, Link, Navigate } from "react-router-dom";
 
 export default function Login() {
+
+  const auth = useSelector((state) => state.auth);
+  const {  isLogged } = auth;
+  
+  if(isLogged){
+    return <Navigate to="/my/dashboard/reservations"/>
+  }
   return (
     <div>
         <header>
