@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload')
 const userRouter = require('./routes/usersRouter');
 const stadiumRouter = require('./routes/stadiumsRouter');
-const bodyParser = require("body-parser")
 
 const dbConnection = require("./db");
 

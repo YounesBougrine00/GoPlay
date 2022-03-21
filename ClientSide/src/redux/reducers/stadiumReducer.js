@@ -3,6 +3,7 @@ import ACTIONS from "../actions/actionTypes";
 const initialState = {
     stadium: [],
     stadiums: [],
+    noResult: "",
     loading: true,
 };
 
@@ -18,17 +19,26 @@ const stadiumReducer = (state = initialState, action) => {
             return {
                 ...state,
                 stadiums: action.payload.stadiumsSelect,
+                noResult: "",
                 loading: false
             };
+        case ACTIONS.CATCH_STADIUMS_SEARCH:
+            return {
+                ...state,
+                noResult: action.payload.noresult,
+                loading: false
+            }
         case ACTIONS.GET_STADIUMS_BY_SEARCH:
             return {
                 ...state,
                 stadiums: action.payload.stadiumsSearch,
+                noResult: "",
                 loading: false
             };
         case ACTIONS.CLEAR_STADIUMS_STATE:
             return {
                 ...state,
+                stadiums: [],
                 loading: true
             }
         default:

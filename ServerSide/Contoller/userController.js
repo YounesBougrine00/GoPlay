@@ -16,14 +16,14 @@ const userCtrl = {
                 return res.status(400).json({ message: "Invalid emails." });
             }
             //See if user exists
-            const user = await User.findOne({ email: req.body.email });
+            const user = await User.findOne({ email: email });
 
             if (user) return res.status(400).json({ message: "Email already exits" });
 
             if (password.length < 4) return res.status(400).json({ message: "Password must be at least 4 characters." })
                 //crypt password
             const salt = await bcrypt.genSalt(12);
-            const hashPassword = await bcrypt.hash(req.body.password, salt);
+            const hashPassword = await bcrypt.hash(password, salt);
 
             //save user to MongoDB
             await new User({...req.body, country: country.label, city: city.label, password: hashPassword }).save();
@@ -111,26 +111,6 @@ const validateLogin = (data) => {
     });
     return schema.validate(data);
 };
-// const validation = (data) => {
-//     const schema = Joi.object().keys({
-//         username: Joi.string().required(),
-//         email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
-//         country: Joi.required(),
-//         city: Joi.required(),
-//         password: Joi.string().required(),
-//         phone: Joi.number().required(),
-
-//     });
-//     return schema.validate(data);
-// }
-// const checkForm = (data) => {
-//     if (!username || !email || !password || !country || !city || !phone) {
-//         return res.status(400).json({ msg: "Please fill in all fields." });
-//     }
-//     if (!validateEmail(email)) {
-//         return res.status(400).json({ msg: "Invalid emails." });
-//     }
-// };
 
 function validateEmail(email) {
     const re =

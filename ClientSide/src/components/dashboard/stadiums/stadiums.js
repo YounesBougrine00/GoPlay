@@ -1,9 +1,16 @@
 import React, { useState, useLayoutEffect, useEffect } from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./stadiums.css";
-import { dispatchGetStadiumBySelect, dispatchGetStadiumBySearch,dispatchGetStadium } from "../../../redux/actions/stadiumAction";
+import {
+  dispatchGetStadiumBySelect,
+  dispatchGetStadiumBySearch,
+  dispatchGetStadium,
+} from "../../../redux/actions/stadiumAction";
 import { Selector } from "../../signUp/SelectInput";
-import {showErrMsg, showSuccessMsg} from "../../utils/notifications/Notification";
+import {
+  showErrMsg,
+  showSuccessMsg,
+} from "../../utils/notifications/Notification";
 import Loader from "../../utils/Loader/loader";
 
 import { BiSearchAlt } from "react-icons/bi";
@@ -61,7 +68,7 @@ const sportTypes = [
   { value: "volley", label: "Volleyball" },
 ];
 const initialState = {
-  err: "",
+  errSearch: "",
   success: "",
   query: "",
 };
@@ -73,10 +80,12 @@ const initialSelectState = {
 };
 
 const LoaderOverlay = () => {
-  return(
-    <div className="loaderOverlay"><Loader /></div>
-  )
-}
+  return (
+    <div className="loaderOverlay">
+      <Loader />
+    </div>
+  );
+};
 
 function Stadiums() {
   const [searchData, setSearchData] = useState(initialState);
@@ -86,18 +95,17 @@ function Stadiums() {
   const dispatch = useDispatch();
 
   const auth = useSelector((state) => state.auth);
-  const stade = useSelector((state)=> state.stade);
+  const stade = useSelector((state) => state.stade);
 
-
-  const {stadiums, loading} = stade;
+  const { stadiums, loading, noResult } = stade;
 
   const { user } = auth;
+
   let cities = user ? data[user.country] : [];
   cities = cities?.map((str, index) => ({ label: str, value: index + 1 }));
 
   const { city, sportType, errSelect } = selectData;
-  const { err, query } = searchData;
-
+  const { errSearch, query } = searchData;
 
   useLayoutEffect(() => {
     fetch(
@@ -113,9 +121,11 @@ function Stadiums() {
       });
   }, []);
 
-  useEffect(()=> {
-      dispatch(dispatchGetStadiumBySelect({"label": user.city},{"label" : "Football"}));
-  }, [])
+  useEffect(() => {
+    dispatch(
+      dispatchGetStadiumBySelect({ label: user.city }, { label: "Football" })
+    );
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -129,84 +139,90 @@ function Stadiums() {
     setSelectData({ ...selectData, sportType: sportType });
   };
 
-  const handleOnSubmitSelect =  (e)=> {
+  const ResultFailure = () => <div className="failure-message">{noResult}</div>;
+
+  const handleOnSubmitSelect = (e) => {
     e.preventDefault();
-    try {
-       dispatch(dispatchGetStadiumBySelect(city,sportType));
-    } catch (err) {
-      err.response.data.message && setSelectData({ ...selectData, errSelect: err.response.data.message, successSelect: "" });
-    }
-  }
-  
-  const handleOnSubmitSearch =  (e)=> {
+    dispatch(dispatchGetStadiumBySelect(city, sportType));
+    noResult !== "" && setSelectData({ ...selectData, errSelect: noResult });
+  };
+
+  const handleOnSubmitSearch = (e) => {
     e.preventDefault();
-    try {
-       dispatch(dispatchGetStadiumBySearch(query));
-    } catch (err) {
-      console.log(err)
-      err.response.data.message && setSelectData({ ...searchData, err: err.response.data.message, success: "" });
-    }
-  }
+    dispatch(dispatchGetStadiumBySearch(query));
+    noResult !== "" && setSearchData({ ...searchData, errSearch: noResult });
+  };
+
+  useEffect(() => {
+    setSearchData({ ...searchData, errSearch: noResult });
+  }, [noResult]);
 
   return (
-    <div className="s_session-container">
-      {err && showErrMsg(err)}
+    <>
+      {errSearch && showErrMsg(errSearch)}
       {errSelect && showErrMsg(errSelect)}
-      <div className="s_head">
-        <div className="img">
-          <form onSubmit={handleOnSubmitSelect}>
-            <div className="input-icons select">
-              <Selector
-                options={cities}
-                value={city}
-                onChange={changeCity}
-                inputId="city"
-                name="city"
-                placeholder="Select a city"
-                styles={styleBar}
-              />
-            </div>
-            <div className="input-icons select">
-              <Selector
-                options={sportTypes}
-                value={sportType}
-                onChange={changeSport}
-                inputId="sportType"
-                name="sportType"
-                placeholder="Select your sport"
-                styles={styleBar}
-              />
-            </div>
-            <button className="select_search">
-              <BiSearchAlt size={20} id="icon" />
-            </button>
-          </form>
-          <form onSubmit={handleOnSubmitSearch}>
-            <div className="input-icons">
-              <input
-                type="text"
-                id="query"
-                onChange={handleInputChange}
-                name="query"
-                placeholder="Search for your stadium by name..."
-              />
-              <button className="search">
+      <div className="s_session-container">
+        <div className="s_head">
+          <div className="img">
+            <form onSubmit={handleOnSubmitSelect}>
+              <div className="input-icons select">
+                <Selector
+                  options={cities}
+                  value={city}
+                  onChange={changeCity}
+                  inputId="city"
+                  name="city"
+                  placeholder="Select a city"
+                  styles={styleBar}
+                />
+              </div>
+              <div className="input-icons select">
+                <Selector
+                  options={sportTypes}
+                  value={sportType}
+                  onChange={changeSport}
+                  inputId="sportType"
+                  name="sportType"
+                  placeholder="Select your sport"
+                  styles={styleBar}
+                />
+              </div>
+              <button className="select_search">
                 <BiSearchAlt size={20} id="icon" />
               </button>
-            </div>
-          </form>
+            </form>
+            <form onSubmit={handleOnSubmitSearch}>
+              <div className="input-icons">
+                <input
+                  type="text"
+                  id="query"
+                  onChange={handleInputChange}
+                  name="query"
+                  placeholder="Search for your stadium by name..."
+                />
+                <button className="search">
+                  <BiSearchAlt size={20} id="icon" />
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
+        <aside className="s_sidebar">
+          <div></div>
+          <div></div>
+        </aside>
+        <div className="s_content">
+          {loading ? (
+            <LoaderOverlay />
+          ) : noResult === "" ? (
+            stadiums.map((stade) => <Stade stadiumData={stade} />)
+          ) : (
+            <ResultFailure />
+          )}
+        </div>
+        <footer></footer>
       </div>
-      <aside className="s_sidebar">
-        <div></div>
-        <div></div>
-      </aside>
-      <div className="s_content">
-        {loading ?  <LoaderOverlay /> :stadiums.map(stade => <Stade stadiumData={stade}/>)
-        }
-      </div>
-      <footer></footer>
-    </div>
+    </>
   );
 }
 

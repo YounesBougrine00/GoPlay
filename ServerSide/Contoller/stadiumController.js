@@ -9,7 +9,7 @@ const stadiumController = {
 
             const stadiums = await Stadium.find({ city: city.label, sports: sportType.label })
 
-            if (stadiums.length == 0) return res.status(200).json({ message: "No Result" });
+            if (stadiums.length == 0) return res.status(400).json({ message: "No Result for your selected options" });
 
             console.log(stadiums);
 
@@ -23,10 +23,10 @@ const stadiumController = {
     getStadiumsByName: async(req, res) => {
         try {
             const { query } = req.body
-            if (!query) return res.status(400).json({ message: "Please fill the search name" });
+            if (query === "") return res.status(400).json({ message: "Please fill the search name" });
 
             const stadium = await Stadium.find({ name: { $regex: ".*" + query + ".*" } })
-            if (!stadium) return res.status(200).json({ message: "No Result" });
+            if (stadium.length == 0) return res.status(400).json({ message: `No Result for the name : ${query}` });
 
             return res.status(200).json(stadium);
 

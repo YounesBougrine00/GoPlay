@@ -49,10 +49,10 @@ export default function SignUpForm() {
   };
 
   const changeCountry = (value) => {
-    setFormData({...formData, country: value.label, city: ''});
+    setFormData({...formData, country: value, city: ''});
   };
   const changeCity = (city) => {
-    setFormData({...formData, city: city.label});
+    setFormData({...formData, city: city});
   };
 
   return (
