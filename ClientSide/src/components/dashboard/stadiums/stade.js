@@ -40,7 +40,7 @@ function Stade(props) {
         </div>
         <div className="reserver">
           <button className="details">détails</button>
-          <Link to={`${_id}`}><button className="book">Book Now</button></Link>
+          <Link to={`${_id}/choice`}><button className="book">Book Now</button></Link>
         </div>
       </div>
     </div>

@@ -144,23 +144,16 @@ function Stadiums() {
   const handleOnSubmitSelect = (e) => {
     e.preventDefault();
     dispatch(dispatchGetStadiumBySelect(city, sportType));
-    noResult !== "" && setSelectData({ ...selectData, errSelect: noResult });
   };
 
   const handleOnSubmitSearch = (e) => {
     e.preventDefault();
     dispatch(dispatchGetStadiumBySearch(query));
-    noResult !== "" && setSearchData({ ...searchData, errSearch: noResult });
   };
-
-  useEffect(() => {
-    setSearchData({ ...searchData, errSearch: noResult });
-  }, [noResult]);
 
   return (
     <>
-      {errSearch && showErrMsg(errSearch)}
-      {errSelect && showErrMsg(errSelect)}
+      {noResult && showErrMsg(noResult)}
       <div className="s_session-container">
         <div className="s_head">
           <div className="img">

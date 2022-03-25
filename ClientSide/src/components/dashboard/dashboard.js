@@ -49,7 +49,7 @@ function Dashboard() {
       </aside>
       <div className="content">
         <Routes>
-          <Route exact path="reservations" element={<Reservations />} />
+          <Route  path="reservations" element={<Reservations />} />
           <Route  path="team" element={<Hello />} />
           <Route  path="opponents" element={<Hello />} />
           <Route  path="opponents" element={<Hello />} />

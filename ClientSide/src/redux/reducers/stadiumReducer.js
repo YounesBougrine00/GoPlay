@@ -19,7 +19,6 @@ const stadiumReducer = (state = initialState, action) => {
             return {
                 ...state,
                 stadiums: action.payload.stadiumsSelect,
-                noResult: "",
                 loading: false
             };
         case ACTIONS.CATCH_STADIUMS_SEARCH:
@@ -32,13 +31,14 @@ const stadiumReducer = (state = initialState, action) => {
             return {
                 ...state,
                 stadiums: action.payload.stadiumsSearch,
-                noResult: "",
                 loading: false
             };
         case ACTIONS.CLEAR_STADIUMS_STATE:
             return {
                 ...state,
                 stadiums: [],
+                stadium: [],
+                noResult: "",
                 loading: true
             }
         default:

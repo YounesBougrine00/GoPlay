@@ -1,6 +1,7 @@
 .session {
-    height: 100vh;
+    /* height: 100vh; */
     padding: 1%;
+    background: linear-gradient(180deg, #FFFFFF 33.85%, #35EE47 77.08%);
 }
 
 .session .errMsg {
@@ -8,7 +9,7 @@
 }
 
 .s_session-container {
-    height: 100%;
+    height: 100vh;
     display: grid;
     grid-template-columns: 20% 80%;
     grid-template-rows: 15% 120% 2%;
@@ -144,6 +145,7 @@
 .stade {
     width: 100%;
     border: 1px solid rgb(173, 173, 173);
+    background-color: white;
     border-radius: 15px;
     height: 250px;
     margin-bottom: 10px;

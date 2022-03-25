@@ -5,13 +5,25 @@ import axios from "axios";
 
 export const dispatchGetStadium = (sid) => async(dispatch) => {
     dispatch(clearStadiumStates())
-    const res = await axios.get(`/api/stadiums/get-stadium/${sid}`)
-    return {
-        type: ACTIONS.GET_STADIUM,
-        payload: {
-            stadium: res.data,
-        }
+    try {
+        const res = await axios.get(`/api/stadiums/get-stadium/${sid}`)
+        dispatch({
+            type: ACTIONS.GET_STADIUM,
+            payload: {
+                stadium: res.data,
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        error.response.data.message &&
+            dispatch({
+                type: ACTIONS.CATCH_STADIUMS_SEARCH,
+                payload: {
+                    noresult: error.response.data.message
+                }
+            })
     }
+
 }
 
 export const dispatchGetStadiumBySelect = (city, sportType) => async(dispatch) => {

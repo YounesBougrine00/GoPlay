@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./dashboard";
 import SessionNavbar from "./sessionNavbar";
 import Stadiums from "./stadiums/stadiums";
-import Book from "./stadiums/book";
+import Book from "./stadiums/book/book";
 import "./dashboard.css";
 
 import { useSelector} from 'react-redux'
@@ -26,7 +26,7 @@ function UserSession() {
       <div className="session">
         <Routes>
           <Route path="stadiums" element={<Stadiums />} />
-          <Route path="stadiums/:sid" element={<Book />} />
+          <Route path="stadiums/:sid/*" element={<Book />} />
           <Route path="dashboard/*" element={<Dashboard />} />
           <Route path="events" element={<HelloWorld />} />
           <Route path="blogs" element={<HelloWorld />} />
