@@ -1,7 +1,7 @@
 .session {
     /* height: 100vh; */
     padding: 1%;
-    background: linear-gradient(180deg, #FFFFFF 33.85%, #35EE47 77.08%);
+    background: linear-gradient(180deg, #FFFFFF 40.85%, #35EE47 90.08%);
 }
 
 .session .errMsg {
@@ -12,7 +12,7 @@
     height: 100vh;
     display: grid;
     grid-template-columns: 20% 80%;
-    grid-template-rows: 15% 120% 2%;
+    grid-template-rows: 15% 90% 2%;
     grid-template-areas: "head head" "sidebar main" "footer footer";
 }
 

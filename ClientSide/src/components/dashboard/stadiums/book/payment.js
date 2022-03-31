@@ -19,11 +19,12 @@ export const styles = {
     })
 }
 
-function Payment() {
+function Payment(props) {
 
     const stade = useSelector((state) => state.stade);
     const {stadium,loading} = stade;
-    const {picture} = stadium;
+    const {picture,name} = stadium;
+  
   return (
     <div className="payment_phase">
       <div>
@@ -37,19 +38,19 @@ function Payment() {
         <div className="stade_details">
           <div className="informations">
             <div>
-              <h3>WELLNESS & SPORT CENTER MOROCCO</h3>
+              <h3>{name}</h3>
             </div>
             <div>
-              <p>Sport : Football</p>
+              <p>Sport : {props.sport.label}</p>
             </div>
             <div>
-              <p>Match 5 vs 5</p>
+              <p>Field : {props.fieldType.label}</p>
             </div>
             <div>
               <span style={{ marginRight: "5px" }}>
                 <BiTime size={30} />
               </span>
-              <p>Match reservation at 11:00 PM 22-03-2022 </p>
+              <p>Match reserved at {props.resTime}H,  date : {props.time.getDate()}/{props.time.getMonth()+1}/{props.time.getFullYear()} </p>
             </div>
           </div>
         </div>

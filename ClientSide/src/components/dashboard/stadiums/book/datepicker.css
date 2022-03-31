@@ -51,6 +51,11 @@
     color: rgb(248, 248, 248);
 }
 
+.book_phases .date_phase .searchDate .dateForm button.search_date:hover {
+    transform: scale(1.1);
+    transition: all 0.1s ease-in-out;
+}
+
 .book_phases .date_phase .selectTime input[type="radio"] {
     display: none;
 }

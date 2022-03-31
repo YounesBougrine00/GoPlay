@@ -208,7 +208,7 @@ function Stadiums() {
           {loading ? (
             <LoaderOverlay />
           ) : noResult === "" ? (
-            stadiums.map((stade) => <Stade stadiumData={stade} />)
+            stadiums.map((stade,index) => <Stade stadiumData={stade} key={index} />)
           ) : (
             <ResultFailure />
           )}

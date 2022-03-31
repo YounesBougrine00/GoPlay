@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload')
 const userRouter = require('./routes/usersRouter');
 const stadiumRouter = require('./routes/stadiumsRouter');
+const reservationRouter = require('./routes/reservationRouter')
 
 const dbConnection = require("./db");
 
@@ -22,6 +23,8 @@ app.use(fileUpload({
 
 app.use('/api/user', userRouter);
 app.use('/api/stadiums', stadiumRouter)
+app.use('/api/reservations', reservationRouter)
+
 
 
 
