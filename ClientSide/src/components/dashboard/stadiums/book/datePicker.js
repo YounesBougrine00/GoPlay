@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState,useLayoutEffect } from "react";
 import DateTimePicker from "react-datetime-picker";
 import Loader from "../../../utils/Loader/loader";
 import { showErrMsg } from "../../../utils/notifications/Notification";
@@ -96,7 +96,7 @@ function DatePicker(props) {
     dispatch(pullReservations(props.time, _id));
   }
 
-  useEffect(()=>{
+  useLayoutEffect(()=>{
     dispatch(pullReservations(props.time,_id))
   }, [])
   return (

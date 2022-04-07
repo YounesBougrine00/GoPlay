@@ -1,15 +1,23 @@
 const { Reservation } = require('../models/reservationModel')
+const { Stadium } = require('../models/stadiumsModel')
+const Stripe = require('stripe')(process.env.PAYMENT_SECRET_KEY)
 
 
 const reservationCtrl = {
     createReservation: async(req, res) => {
         try {
-            const { resTime, sport, fieldType, _id } = req.body
+            const { resTime, sport, fieldType, _id, token, amount, time, id } = req.body
             if (!resTime || !sport || !fieldType) {
                 return res.status(400).json({ message: "Please fill in all fields." });
             }
-            await new Reservation({ user: req.user.id, stadium: _id, field: fieldType, sport: sport, resTime: resTime }).save();
-            res.status(201).json({ message: "Reservation completed succefully" });
+            await Stripe.charges.create({
+                source: token.id,
+                amount,
+                currency: 'mad',
+            });
+
+            await new Reservation({ user: id, stadium: _id, payment_ref: token.id, field: fieldType, sport: sport, resTime: resTime, time: time }).save();
+            res.status(200).json({ message: "Your reservation was succefully completed" });
         } catch (error) {
             return res.status(500).json({ message: error.message });
         }
@@ -29,6 +37,22 @@ const reservationCtrl = {
 
             res.json(reservations)
 
+        } catch (error) {
+            return res.status(500).json({ message: error.message });
+        }
+    },
+    getUserReservations: async(req, res) => {
+        try {
+            const { id } = req.body
+            const reservations = await Reservation.find({ user: id }).sort([
+                ['date', -1]
+            ])
+
+            if (reservations.length == 0) return res.status(400).json({ message: "You have no reservations yet " })
+            const stadiums = await Stadium.findById(reservations[0].stadium)
+            console.log(stadiums)
+
+            res.status(200).send([reservations[0], stadiums])
         } catch (error) {
             return res.status(500).json({ message: error.message });
         }

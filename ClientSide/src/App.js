@@ -22,7 +22,7 @@ function App() {
     const firstLogin = localStorage.getItem('firstLogin')
     if(firstLogin){
       const getToken = async () => {
-        console.log("Im here");
+        console.log("Im connected");
         const res = await axios.post('/api/user/authtoken', null)
         console.log(res)
         dispatch({type: 'GET_TOKEN', payload: res.data.access_token})

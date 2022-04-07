@@ -25,7 +25,7 @@ const stadiumSchema = new mongoose.Schema({
         default: "Sport Club with 5 diffenrent fields of football and 2 fields of baketball having all comforts options so you have the much fun you can with your friends"
     },
     price: {
-        type: String,
+        type: Number,
         required: [true, "Enter your price"]
     },
     city: {

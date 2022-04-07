@@ -1,10 +1,18 @@
 import React from "react";
 import "./payment.css";
 import { useSelector } from "react-redux";
-import { HiLocationMarker } from "react-icons/hi";
 import { BiTime } from "react-icons/bi";
 import { Selector } from "../../../signUp/SelectInput";
-import { Link } from 'react-router-dom'
+import StripeCheckout from 'react-stripe-checkout'; 
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+
+
+
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
 
 export const styles = {
     control: (base) => ({
@@ -23,7 +31,40 @@ function Payment(props) {
 
     const stade = useSelector((state) => state.stade);
     const {stadium,loading} = stade;
-    const {picture,name} = stadium;
+    const {picture,name, price,_id} = stadium;
+    const navigate = useNavigate()
+
+    const auth = useSelector((state) => state.auth); 
+    const {user} = auth
+
+    const handleSuccess = (msg) => {
+      MySwal.fire({
+        icon: 'success',
+        title: msg,
+        time: 4000,
+      });
+    };
+    const handleFailure = () => {
+      MySwal.fire({
+        icon: 'error',
+        title: 'Payment failure',
+        time: 4000,
+      });
+    };
+
+    const payNow = async (token) => {
+      try {
+        const payment = await axios.post('/api/reservations/create-reservation',{id: user._id,_id:_id,amount:price*10,token,sport:props.sport.label,fieldType:props.fieldType.label,resTime:props.resTime,time:props.time})
+        console.log(payment)
+        if (payment.status === 200) {
+          handleSuccess(payment.data.message);
+          navigate('/my/dashboard/reservations')
+        }
+      } catch (error) {
+        handleFailure();
+        console.log(error);
+      }
+    }
   
   return (
     <div className="payment_phase">
@@ -45,6 +86,9 @@ function Payment(props) {
             </div>
             <div>
               <p>Field : {props.fieldType.label}</p>
+            </div>
+            <div>
+              <p>Price : <b>{price} DHS</b></p>
             </div>
             <div>
               <span style={{ marginRight: "5px" }}>
@@ -79,7 +123,20 @@ function Payment(props) {
             <div className="add"><button className="add">Add a card</button></div>
           </div>
       </div>
-      <div className="confirm_payment"><Link to=""><button>Confirm Payment</button></Link></div>
+      <div className="confirm_payment">
+        <div>
+           <StripeCheckout
+              stripeKey="pk_test_51KlaM7JHzzGLB3eHq1jbkl8ZWCakw1RhvQAGoG0ptaDAkzQj0a6ZeOpgqTmaU8iFJsBLpxqaRVKlxhPuN0rCXQhk00gkppWN0p"
+              label="Confirm Payment"
+              name="Pay With Credit Card"
+              billingAddress
+              shippingAddress
+              amount={price*10}
+              description={`Your total is ${price} MAD`}
+              token={payNow}
+            />
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { HiLocationMarker } from "react-icons/hi";
 import { BiTime } from "react-icons/bi";
 import { GrContact } from "react-icons/gr";
 import {Link} from "react-router-dom";
+import Modal from "../../utils/Modal";
 
 function Stade(props) {
   const {_id, picture, name, sports,endTime, adress, contact} = props.stadiumData
+  const [openModal, setOpenModal] = useState(false)
   return (
     <div className="stade" key={_id}>
       <div className="stade_img">
@@ -39,10 +41,37 @@ function Stade(props) {
           </div>
         </div>
         <div className="reserver">
-          <button className="details">détails</button>
+          <button className="details" onClick={() => setOpenModal(true)}>détails</button>
           <Link to={`${_id}/choice`}><button className="book">Book Now</button></Link>
         </div>
       </div>
+      {openModal && 
+      <Modal isOpen={setOpenModal}>
+        <div>
+              <h3>{name}</h3>
+            </div>
+            <div>
+              {sports.map(sport => <p key={sport}>{sport} . </p>)}
+            </div>
+            <div>
+              <span style={{ marginRight: "5px" }}>
+                <HiLocationMarker size={30} />
+              </span>
+              <p>{adress}</p>
+            </div>
+            <div>
+              <span style={{ marginRight: "5px" }}>
+                <BiTime size={30} />
+              </span>
+              <p>Ouvert, ferme à {endTime}</p>
+            </div>
+            <div>
+              <span style={{ marginRight: "5px" }}>
+                <GrContact size={25} />
+              </span>
+              <p>Contact : {contact}</p>
+            </div>
+        </Modal>}
     </div>
   );
 }

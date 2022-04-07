@@ -11,6 +11,9 @@ const reservationSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'stadiums'
     },
+    payment_ref: {
+        type: String
+    },
     resTime: {
         type: Number,
         required: [true]
