@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import "./payment.css";
 import { useSelector } from "react-redux";
 import { BiTime } from "react-icons/bi";
@@ -34,8 +34,15 @@ function Payment(props) {
     const {picture,name, price,_id} = stadium;
     const navigate = useNavigate()
 
+    const inputRef = useRef()
+
     const auth = useSelector((state) => state.auth); 
     const {user} = auth
+
+    const handlePayment = () => {
+      console.log( inputRef.current)
+      inputRef.current.onClick()
+    }
 
     const handleSuccess = (msg) => {
       MySwal.fire({
@@ -124,18 +131,20 @@ function Payment(props) {
           </div>
       </div>
       <div className="confirm_payment">
-        <div>
-           <StripeCheckout
-              stripeKey="pk_test_51KlaM7JHzzGLB3eHq1jbkl8ZWCakw1RhvQAGoG0ptaDAkzQj0a6ZeOpgqTmaU8iFJsBLpxqaRVKlxhPuN0rCXQhk00gkppWN0p"
-              label="Confirm Payment"
-              name="Pay With Credit Card"
-              billingAddress
-              shippingAddress
-              amount={price*10}
-              description={`Your total is ${price} MAD`}
-              token={payNow}
-            />
-        </div>
+        <button onClick={handlePayment}>Confirm Payment</button>
+      </div>
+      <div className="stripe_button" id="stripe" >
+        <StripeCheckout
+            ref={inputRef}
+            stripeKey="pk_test_51KlaM7JHzzGLB3eHq1jbkl8ZWCakw1RhvQAGoG0ptaDAkzQj0a6ZeOpgqTmaU8iFJsBLpxqaRVKlxhPuN0rCXQhk00gkppWN0p"
+            label="Confirm Payment"
+            name="Pay With Credit Card"
+            billingAddress
+            shippingAddress
+            amount={price*10}
+            description={`Your total is ${price} MAD`}
+            token={payNow}
+          />
       </div>
     </div>
   );
