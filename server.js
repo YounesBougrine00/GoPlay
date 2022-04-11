@@ -27,12 +27,12 @@ app.use('/api/stadiums', stadiumRouter)
 app.use('/api/reservations', reservationRouter)
 
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static('ClinetSide/build'))
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(_dirname, 'ClientSide', 'build', 'index.html'))
-    })
-}
+// if (process.env.NODE_ENV === "production") {
+//     app.use(express.static('ClinetSide/build'))
+//     app.get('*', (req, res) => {
+//         res.sendFile(path.resolve(_dirname, 'ClientSide', 'build', 'index.html'))
+//     })
+// }
 
 
 
