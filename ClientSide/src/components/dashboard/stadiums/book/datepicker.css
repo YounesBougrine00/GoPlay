@@ -1,0 +1,119 @@
+.book_phases .date_phase {
+    flex: 5;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 1%;
+}
+
+.book_phases .date_phase .searchDate {
+    flex: 1;
+    width: 70%;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.book_phases .date_phase .selectTime {
+    border-top: 1px solid gray;
+    flex: 2;
+    padding: 20px;
+    margin-top: 20px;
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    align-items: center;
+    justify-content: space-around;
+}
+
+.book_phases .date_phase .searchDate .dateForm {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.book_phases .date_phase .searchDate .dateForm button.search_date {
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    background-color: #1dee28;
+    border: 2px solid rgb(207, 207, 207);
+    color: rgb(248, 248, 248);
+}
+
+.book_phases .date_phase .searchDate .dateForm button.search_date:hover {
+    transform: scale(1.1);
+    transition: all 0.1s ease-in-out;
+}
+
+.book_phases .date_phase .selectTime input[type="radio"] {
+    display: none;
+}
+
+.book_phases .date_phase .selectTime div.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+    margin: 30px;
+}
+
+.book_phases .date_phase .selectTime div.box label span {
+    cursor: pointer;
+    width: 100%;
+    height: 90%;
+    padding: 3% 0;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 40px;
+    color: white;
+}
+
+.book_phases .date_phase .selectTime div.box input[type="radio"]:checked+span {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(112, 112, 112);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: black;
+}
+
+.book_phases .date_phase .selectTime div.box label {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book_phases .date_phase .confirmChoice {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 80%;
+    padding: 20px;
+}
+
+.book_phases .date_phase .confirmChoice button {
+    cursor: pointer;
+    width: 270px;
+    height: 50px;
+    border-radius: 15px;
+    margin-right: 10px;
+    background-color: rgb(248, 248, 248);
+    border: 2px solid rgb(207, 207, 207);
+    color: #1dee28;
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 30px;
+}

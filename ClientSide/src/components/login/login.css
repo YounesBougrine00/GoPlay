@@ -1,0 +1,161 @@
+.container {
+    background: linear-gradient(180deg, rgba(53, 238, 71, 0) 0%, #35EE47 100%);
+    min-height: 100vh;
+    /* display: flex;
+    flex-direction: column;
+    flex-wrap: wrap; */
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+}
+
+.navbar {
+    width: 30%;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    justify-content: space-evenly;
+}
+
+.navbar-brand {
+    padding: 2px;
+    margin-bottom: 2px;
+}
+
+.navbar-brand a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.navbar-brand h2 {
+    font-size: 40px;
+    text-decoration: none;
+}
+
+.navbar-brand h2 span#point {
+    font-size: 45px;
+    color: #53fd64;
+}
+
+#signup {
+    cursor: pointer;
+    background: #35EE47;
+    border-radius: 40px;
+    width: 120px;
+    height: 40px;
+    color: #FFFFFF;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+}
+
+.nav div li a {
+    color: #000000;
+    text-decoration: none;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.box1 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    height: 500px;
+    position: relative;
+}
+
+.box1 img {
+    height: 500px;
+}
+
+.input-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.input-icons span.icon {
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    height: 50px;
+    margin-bottom: 10px;
+    width: 50px;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    border: 2px solid #000000;
+    border-left: 0;
+}
+
+#icon {
+    height: 30px;
+}
+
+.box1 form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.box1 input,
+.box1 input:focus {
+    outline: none;
+    background: #FFFFFF;
+    border: 2px solid #000000;
+    border-radius: 40px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-right: 0;
+    width: 370px;
+    height: 50px;
+    margin-bottom: 10px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 50px;
+    padding: 15px;
+}
+
+.box1 button {
+    cursor: pointer;
+    background: #000000;
+    border: none;
+    border-radius: 40px;
+    width: 250px;
+    height: 50px;
+    color: #FFFFFF;
+    margin: 10px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 50px;
+}
+
+.box2 {
+    position: relative;
+    text-align: center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    /* line-height: 37px; */
+    color: #FFFFFF;
+    padding: 10px;
+}

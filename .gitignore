@@ -1,0 +1,4 @@
+ClientSide/node_modules
+ServerSide/node_modules
+node_modules
+.env
