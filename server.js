@@ -27,7 +27,7 @@ app.use('/api/reservations', reservationRouter)
 
 
 if (process.env.NODE_ENV === "production") {
-    app.use(espress.static('ClinetSide/build'))
+    app.use(express.static('ClinetSide/build'))
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(_dirname, 'ClientSide', 'build', 'index.html'))
     })
