@@ -2,7 +2,7 @@
     "name": "serverside",
     "version": "1.0.0",
     "main": "server.js",
-    "author": "",
+    "author": "younes bougrine",
     "license": "ISC",
     "description": "",
     "scripts": {
@@ -10,7 +10,8 @@
         "start": "node server.js",
         "server": "nodemon server.js",
         "client": "cd .. && npm start --prefix ClientSide",
-        "dev": "concurrently \"npm run server\" \"npm run client\""
+        "dev": "concurrently \"npm run server\" \"npm run client\"",
+        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false cd .. && npm install --prefix ClientSide && npm run build --prefix ClientSide"
     },
     "dependencies": {
         "bcrypt": "^5.0.1",
