@@ -7,6 +7,7 @@ const fileUpload = require('express-fileupload')
 const userRouter = require('./routes/usersRouter');
 const stadiumRouter = require('./routes/stadiumsRouter');
 const reservationRouter = require('./routes/reservationRouter')
+const path = require("path")
 
 const dbConnection = require("./db");
 
