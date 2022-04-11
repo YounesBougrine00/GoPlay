@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {useNavigate} from "react-router-dom";
 import {HiLocationMarker} from 'react-icons/hi';
 import {MdDirections} from 'react-icons/md';
 import {BiTime} from 'react-icons/bi';
@@ -23,6 +24,8 @@ function Reservations() {
 
   const auth = useSelector((state) => state.auth); 
   const {user} = auth
+
+  const navigate = useNavigate()
 
   const LoaderOverlay = () => {
     return (
@@ -52,7 +55,10 @@ function Reservations() {
     <div className="reservations">
       {loading ? (<LoaderOverlay />) 
       :
-      (err ? <div><p>{err}</p></div> 
+      (err ? <div className='no_reservations'>
+                <p>{err}</p>
+                <button className='find' onClick={() => navigate('/my/stadiums')}>Find a stadium Now</button>
+              </div> 
       :
       <>
         <div className='picture'>

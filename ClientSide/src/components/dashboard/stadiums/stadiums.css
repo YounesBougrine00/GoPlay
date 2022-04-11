@@ -190,6 +190,31 @@
     align-items: center;
 }
 
+.modal .choice_infos {
+    padding: 2%;
+    /* width: 40%; */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    border: 2px solid rgb(161, 158, 158);
+    border-radius: 15px;
+    background-color: white;
+}
+
+.modal .choice_infos div.info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.modal .choice_infos div.info p i {
+    color: #35EE47;
+    font-weight: bold;
+}
+
 .stade .stade_details .reserver {
     flex: 1;
     display: flex;
