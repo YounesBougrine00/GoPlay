@@ -1,6 +1,6 @@
 .scontainer {
     background: linear-gradient(180deg, rgba(53, 238, 71, 0) 0%, #35EE47 100%);
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
