@@ -11,7 +11,7 @@
         "server": "nodemon server.js",
         "client": "npm start --prefix ClientSide",
         "dev": "concurrently \"npm run server\" \"npm run client\"",
-        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false  && npm install --prefix ClientSide && npm run build --prefix ClientSide"
+        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix ClientSide && npm run build --prefix ClientSide"
     },
     "dependencies": {
         "bcrypt": "^5.0.1",
