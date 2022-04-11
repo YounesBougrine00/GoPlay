@@ -33,6 +33,15 @@ app.use('/api/reservations', reservationRouter)
 //         res.sendFile(path.resolve(_dirname, 'ClientSide', 'build', 'index.html'))
 //     })
 // }
+//STATIC
+// get directory where is index.html
+const root = path.join(__dirname, 'ClientSide', 'build');
+//express.use static with the directory
+app.use(express.static(root));
+//express get request any (*) root, please use file that is on root directory configure above.
+app.get("*", (req, res) => {
+    res.sendFile('index.html', { root });
+});
 
 
 
